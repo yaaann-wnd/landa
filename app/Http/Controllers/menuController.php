@@ -35,15 +35,18 @@ class menuController extends Controller
     public function store(Request $request)
     {
         $tahun = $request->tahun;
-        $data = json_decode(file_get_contents('http://tes-web.landa.id/intermediate/menu'));
-
-        $data2 = json_decode(file_get_contents('http://tes-web.landa.id/intermediate/transaksi?tahun=' . $tahun));
+        $data = json_decode(file_get_contents('https://tes-web.landa.id/intermediate/menu'));
+        
+        $data2 = json_decode(file_get_contents('https://tes-web.landa.id/intermediate/transaksi?tahun=' . $tahun));
+        
+        // total keseluruhan
         $tt = 0;
-
+        
         foreach ($data2 as $all) {
             $tt += $all->total;
         }
-
+        
+        // total setiap menu dalam satu bulan
         foreach ($data as $d) {
             $d->menu;
 
@@ -51,44 +54,38 @@ class menuController extends Controller
                 $result[$d->menu][$i] = 0;
             }
         }
-
         
+        // total setiap menu dalam satu bulan
         foreach ($data2 as $dt) {
             $bulan = date('n', strtotime($dt->tanggal));
             $result[$dt->menu][$bulan] += $dt->total;
         }
-        
+
+        // total tiap menu
+        foreach ($data as $menu) {
+            $totalmenu[$menu->menu] = 0;
+        }
+
+        // total tiap menu
+        foreach ($data2 as $totaltk) {
+            $totalmenu[$totaltk->menu] += $totaltk->total;
+        }
+
+        // total semua menu dalam satu bulan
         foreach ($data2 as $d2) {
             for ($i = 1; $i <= 12; $i++) {
                 $hasil[$i] = 0;
             }
         }
 
-        // MENGHITUNG JUMLAH TOTAL PERBULAN
+        // total semua menu dalam satu bulan
         foreach ($data2 as $month) {
             $mth = date('n', strtotime($month->tanggal));
             $hasil[$mth] += $month->total;
         }
 
-        foreach ($data as $menu) {
-            $totalmenu[$menu->menu] = 0;
-        }
 
-        // MENGHITUNG TOTAL TIAP MENU
-        foreach ($data2 as $totaltk) {
-            $totalmenu[$totaltk->menu] += $totaltk->total;
-        }
-
-        foreach ($data as $eachmenu) {
-            $totalmenu[$eachmenu->menu] = 0;
-        }
-
-        // MENGHITUNG TOTAL TIAP MENU
-        foreach ($data2 as $tttrans) {
-            $totalmenu[$tttrans->menu] += $tttrans->total;
-        }
-
-        return view('welcome', compact('data', 'data2', 'result', 'hasil', 'totalmenu', 'tt'));
+        return view('welcome', compact('data', 'data2', 'result', 'hasil', 'totalmenu', 'tt', 'tahun'));
     }
 
     /**

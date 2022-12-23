@@ -55,7 +55,7 @@
                         <thead>
                             <tr class="table-dark">
                                 <th rowspan="2" style="text-align:center;vertical-align: middle;width: 250px;">Menu</th>
-                                <th colspan="12" style="text-align: center;">Periode Pada 2021
+                                <th colspan="12" style="text-align: center;">Periode Pada {{ $tahun }}
                                 </th>
                                 <th rowspan="2" style="text-align:center;vertical-align: middle;width:75px">Total</th>
                             </tr>
@@ -83,9 +83,9 @@
                             <tr>
                                 <td>{{ $d->menu }}</td>      
                                     @for($i = 1; $i <= 12; $i++)
-                                        <td>{{ $result[$d->menu][$i] }}</td>                                        
+                                        <td class="text-end">{{ $result[$d->menu][$i] == 0? '': $result[$d->menu][$i] }}</td>                                        
                                     @endfor                           
-                                <td>{{ $totalmenu[$d->menu] }}</td>
+                                <td class="fw-bold text-end">{{ $totalmenu[$d->menu] }}</td>
                             </tr>
                             @endif
                             @endforeach
@@ -97,18 +97,18 @@
                                 @if($d->kategori == 'minuman')
                                 <td>{{ $d->menu }}</td>
                                     @for($i = 1; $i <= 12; $i++)
-                                        <td>{{ $result[$d->menu][$i] }}</td>                                        
+                                        <td class="text-end">{{ $result[$d->menu][$i] == 0? '': $result[$d->menu][$i] }}</td>                                        
                                     @endfor                                
-                                    <td>{{ $totalmenu[$d->menu] }}</td>
+                                    <td class="fw-bold text-end">{{ $totalmenu[$d->menu] }}</td>
                                 @endif
                             </tr>
                             @endforeach
                             <tr class="table-dark">
                                 <td><b>Total</b></td>
                                 @for ($i = 1; $i <= 12; $i++)
-                                <td>{{ $hasil[$i] }}</td>
+                                <td class="text-end fw-bold">{{ $hasil[$i] }}</td>
                                 @endfor
-                                <td>{{ $tt }}</td>
+                                <td class="text-end fw-bold">{{ $tt }}</td>
                             </tr>
                         </tbody>
                     </table>
