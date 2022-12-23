@@ -89,6 +89,13 @@
                             </tr>
                             @endif
                             @endforeach
+                            <tr class="table-primary    ">
+                                <td><b>Total penjualan makanan</b></td>
+                                @for ($i = 1; $i <= 12; $i++)
+                                <td class="text-end fw-bold">{{ $makan[$i] }}</td>
+                                @endfor
+                                <td class="text-end fw-bold">{{ $tm }}</td>
+                            </tr>
                             <tr>
                                 <td class="table-secondary" colspan="14"><b>Minuman</b></td>
                             </tr>
@@ -103,12 +110,11 @@
                                 @endif
                             </tr>
                             @endforeach
-                            <tr class="table-dark">
-                                <td colspan="13"><b>Total penjualan makanan</b></td>
-                                <td class="text-end fw-bold">{{ $tm }}</td>
-                            </tr>
-                            <tr class="table-dark">
-                                <td colspan="13"><b>Total penjualan minuman</b></td>
+                            <tr class="table-primary">
+                                <td><b>Total penjualan minuman</b></td>
+                                @for ($i = 1; $i <= 12; $i++)
+                                <td class="text-end fw-bold">{{ $minum[$i] }}</td>
+                                @endfor
                                 <td class="text-end fw-bold">{{ $tmn }}</td>
                             </tr>
                             <tr class="table-dark">
