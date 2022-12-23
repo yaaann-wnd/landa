@@ -34,10 +34,10 @@
                         <div class="col-2">
                             <div class="form-group">
                                 <select id="my-select" class="form-control" name="tahun">
-                                    <option value="">Pilih Tahun</option>
-                                    <option value="2021" selected="">2021</option>
-                                    <option value="2022">2022</option>
-                                </select>
+                                    <option value="" {{ isset($tahun)? '' : 'selected' }}>Pilih Tahun</option>
+                                    <option value="2021" @isset($tahun){{ $tahun == 2021? 'selected' : '' }}@endisset>2021</option>
+                                    <option value="2022" @isset($tahun){{ $tahun == 2022? 'selected' : '' }}@endisset>2022</option>
+                                </select>   
                             </div>
                         </div>
                         <div class="col-4">
@@ -103,6 +103,14 @@
                                 @endif
                             </tr>
                             @endforeach
+                            <tr class="table-dark">
+                                <td colspan="13"><b>Total penjualan makanan</b></td>
+                                <td class="text-end fw-bold">{{ $tm }}</td>
+                            </tr>
+                            <tr class="table-dark">
+                                <td colspan="13"><b>Total penjualan minuman</b></td>
+                                <td class="text-end fw-bold">{{ $tmn }}</td>
+                            </tr>
                             <tr class="table-dark">
                                 <td><b>Total</b></td>
                                 @for ($i = 1; $i <= 12; $i++)
