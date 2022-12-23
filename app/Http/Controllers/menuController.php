@@ -41,7 +41,7 @@ class menuController extends Controller
         
         // total keseluruhan
         $tt = 0;
-        
+
         foreach ($data2 as $all) {
             $tt += $all->total;
         }
@@ -57,8 +57,8 @@ class menuController extends Controller
         
         // total setiap menu dalam satu bulan
         foreach ($data2 as $dt) {
-            $bulan = date('n', strtotime($dt->tanggal));
-            $result[$dt->menu][$bulan] += $dt->total;
+            $m = date('n', strtotime($dt->tanggal));
+            $result[$dt->menu][$m] += $dt->total;
         }
 
         // total tiap menu
